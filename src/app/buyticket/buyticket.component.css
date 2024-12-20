@@ -1,0 +1,71 @@
+.ticket-container {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    font-size: 24px;
+    color: #333333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    font-size: 16px;
+    color: #555555;
+    margin: 10px 0;
+  }
+  
+  label {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333333;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  button:active {
+    background-color: #1c5d8a;
+  }
+  
+  button:disabled {
+    background-color: #b0c4de;
+    cursor: not-allowed;
+  }
+  
+  .ng-template {
+    text-align: center;
+    font-size: 18px;
+    color: #555555;
+  }

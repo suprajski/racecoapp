@@ -1,0 +1,39 @@
+<div class="report-container">
+    <h1>Reports</h1>
+    <div *ngIf="reports.length; else noReports">
+      <table>
+        <thead>
+          <tr>
+            <th>Report ID</th>
+            <th>User</th>
+            <th>Track</th>
+            <th>What Happened</th>
+            <th>Timestamp</th>
+            <th>Resolved</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let report of reports">
+            <td>{{ report.reportId }}</td>
+            <td>{{ report.user.firstName }} {{ report.user.lastName }}</td>
+            <td>{{ report.track.trackName }}</td>
+            <td>{{ report.whatHappened }}</td>
+            <td>{{ report.timestamp | date: 'short' }}</td>
+            <td>{{ report.isResolved ? 'Yes' : 'No' }}</td>
+            <td>
+              <button
+                *ngIf="!report.isResolved"
+                (click)="resolveReport(report.reportId)"
+              >
+                Resolve
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ng-template #noReports>
+      <p>No reports found.</p>
+    </ng-template>
+  </div>

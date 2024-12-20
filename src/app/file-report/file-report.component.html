@@ -1,0 +1,32 @@
+<div class="file-report-container">
+    <h1>File a Report</h1>
+    <form [formGroup]="reportForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="track">Select Track</label>
+        <select id="track" formControlName="trackId">
+          <option *ngFor="let track of tracks" [value]="track.trackId">
+            {{ track.trackName }} ({{ track.city.cityName }})
+          </option>
+        </select>
+        <small *ngIf="reportForm.get('trackId')?.invalid && reportForm.get('trackId')?.touched">
+          Please select a track.
+        </small>
+      </div>
+  
+      <div class="form-group">
+        <label for="whatHappened">What Happened?</label>
+        <textarea
+          id="whatHappened"
+          formControlName="whatHappened"
+          placeholder="Describe the issue"
+          rows="5"
+          [class.invalid]="reportForm.get('whatHappened')?.invalid && reportForm.get('whatHappened')?.touched"
+        ></textarea>
+        <small *ngIf="reportForm.get('whatHappened')?.invalid && reportForm.get('whatHappened')?.touched">
+          Description is required.
+        </small>
+      </div>
+  
+      <button type="submit" [disabled]="reportForm.invalid">Submit Report</button>
+    </form>
+  </div>

@@ -1,0 +1,16 @@
+<app-menu></app-menu>
+<div class="container">
+    <h2>Events in : {{ branchCountry }}</h2>
+    <ul *ngIf="events.length; else noTracks">
+      <li *ngFor="let event of events">
+        <p><strong>Track Name:</strong> {{ event.track.trackName }}</p>
+        <p><strong>Starting date:</strong> {{ event.startDate }}  happens in: {{ event.track.city.cityName }}</p>
+        <p><strong>Can users race?</strong> {{event.canUsersRace? 'Yes' : 'No'}}</p>
+        <button [routerLink]="['/events', event.eventId, 'buy']">Buy Ticket</button>
+        <hr />
+      </li>
+    </ul>
+    <ng-template #noTracks>
+      <p>No events found for this branch.</p>
+    </ng-template>
+  </div>

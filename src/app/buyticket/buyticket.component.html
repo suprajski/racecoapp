@@ -1,0 +1,32 @@
+<div class="ticket-container">
+    <h1>Buy Ticket</h1>
+    <div *ngIf="eventDetails; else loading">
+      <p><strong>Event Name:</strong> {{ eventDetails.eventName }}</p>
+      <p><strong>Date:</strong> {{ eventDetails.startDate }}</p>
+      <p><strong>Track:</strong> {{ eventDetails.track.trackName }}</p>
+      <p><strong>Users Can Race:</strong> {{ eventDetails.canUsersRace ? 'Yes' : 'No' }}</p>
+  
+      <div *ngIf="eventDetails.canUsersRace">
+        <label for="participationType">Choose Participation Type:</label>
+        <select
+          id="participationType"
+          [(ngModel)]="participationType"
+          (change)="onParticipationTypeChange()"
+        >
+          <option value="Race">Race</option>
+          <option value="Watch">Watch</option>
+        </select>
+      </div>
+  
+      <div *ngIf="!eventDetails.canUsersRace">
+        <p><strong>Participation Type:</strong> Watching only</p>
+      </div>
+  
+      <p><strong>Price:</strong> {{ price | currency }}</p>
+      <button (click)="confirmPurchase()">Confirm Purchase</button>
+    </div>
+  
+    <ng-template #loading>
+      <p>Loading event details...</p>
+    </ng-template>
+  </div>

@@ -1,0 +1,118 @@
+<div class="employee-container">
+    <h1>Employee List</h1>
+    <button (click)="openAddEmployeeForm()">Add New Employee</button>
+  
+    <div *ngIf="employees.length > 0; else noEmployees">
+        <table>
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let employee of employees">
+                <td>{{ employee.firstName }}</td>
+                <td>{{ employee.lastName }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.role.roleName }}</td>
+                <td>
+                  <!-- Conditionally show the Fire button based on role -->
+                  <button
+                    *ngIf="canFireEmployee(employee)"
+                    (click)="fireEmployee(employee.userId)"
+                  >
+                    Fire
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    <ng-template #noEmployees>
+      <p>No employees found.</p>
+    </ng-template>
+  
+    <!-- Add Employee Form -->
+    <div *ngIf="showAddEmployeeForm" class="add-employee-form">
+        <h2>Add New Employee</h2>
+        <form [formGroup]="addEmployeeForm" (ngSubmit)="onAddEmployee()">
+            <div>
+              <label for="firstName">First Name</label>
+              <input id="firstName" type="text" formControlName="firstName" />
+              <small *ngIf="addEmployeeForm.get('firstName')?.invalid && addEmployeeForm.get('firstName')?.touched">
+                First name is required.
+              </small>
+            </div>
+          
+            <div>
+              <label for="lastName">Last Name</label>
+              <input id="lastName" type="text" formControlName="lastName" />
+              <small *ngIf="addEmployeeForm.get('lastName')?.invalid && addEmployeeForm.get('lastName')?.touched">
+                Last name is required.
+              </small>
+            </div>
+          
+            <div>
+              <label for="email">Email</label>
+              <input id="email" type="email" formControlName="email" />
+              <small *ngIf="addEmployeeForm.get('email')?.invalid && addEmployeeForm.get('email')?.touched">
+                Valid email is required.
+              </small>
+            </div>
+          
+            <div>
+              <label for="passwordHash">Password</label>
+              <input id="passwordHash" type="password" formControlName="passwordHash" />
+              <small *ngIf="addEmployeeForm.get('passwordHash')?.invalid && addEmployeeForm.get('passwordHash')?.touched">
+                Password must be at least 6 characters.
+              </small>
+            </div>
+          
+            <!-- Address Fields -->
+            <div formGroupName="address">
+              <label for="street">Street</label>
+              <input id="street" type="text" formControlName="street" />
+              <small *ngIf="addEmployeeForm.get('address.street')?.invalid && addEmployeeForm.get('address.street')?.touched">
+                Street is required.
+              </small>
+          
+              <div formGroupName="city">
+                <label for="cityName">City</label>
+                <input id="cityName" type="text" formControlName="cityName" />
+                <small *ngIf="addEmployeeForm.get('address.city.cityName')?.invalid && addEmployeeForm.get('address.city.cityName')?.touched">
+                  City is required.
+                </small>
+          
+                <label for="postcode">Postcode</label>
+                <input id="postcode" type="text" formControlName="postcode" />
+                <small *ngIf="addEmployeeForm.get('address.city.postcode')?.invalid && addEmployeeForm.get('address.city.postcode')?.touched">
+                  Postcode must be 5 digits.
+                </small>
+          
+                <div formGroupName="branch">
+                  <label for="branch">Branch</label>
+                  <select id="branch" formControlName="branchId">
+                    <option *ngFor="let branch of branches" [value]="branch.branchId">
+                      {{ branch.country }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          
+            <!-- Role Selection -->
+            <div formGroupName="role">
+              <label for="role">Role</label>
+              <select id="role" formControlName="roleId">
+                <option *ngFor="let role of filteredRoles" [value]="role.roleId">
+                  {{ role.roleName }}
+                </option>
+              </select>
+            </div>
+          
+            <button type="submit" [disabled]="addEmployeeForm.invalid">Add Employee</button>
+          </form>

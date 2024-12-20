@@ -1,0 +1,9 @@
+<div class="dropdown-container">
+    <label for="branches">Choose a branch:</label>
+    <select id="branches" (change)="onOptionSelect($event)">
+      <option [value]="-1" disabled selected>Select a branch</option>
+      <option *ngFor="let branch of branches$ | async; index as i" [value]="i">
+        {{ branch.country }}
+      </option>
+    </select>
+  </div>

@@ -1,0 +1,48 @@
+<div class="register-container">
+    <h2>Register</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="firstName">First Name</label>
+        <input id="firstName" type="text" formControlName="firstName" />
+      </div>
+      <div>
+        <label for="lastName">Last Name</label>
+        <input id="lastName" type="text" formControlName="lastName" />
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" />
+      </div>
+      <div>
+        <label for="passwordHash">Password</label>
+        <input id="passwordHash" type="password" formControlName="passwordHash" />
+      </div>
+      <div>
+        <label for="birthday">Birthday</label>
+        <input id="birthday" type="date" formControlName="birthday" />
+      </div>
+  
+      <!-- Address Group -->
+      <div formGroupName="address">
+        <label for="street">Street</label>
+        <input id="street" type="text" formControlName="street" />
+        <div formGroupName="city">
+          <label for="cityName">City</label>
+          <input id="cityName" type="text" formControlName="cityName" />
+          <label for="postcode">Postcode</label>
+          <input id="postcode" type="text" formControlName="postcode" />
+          <div formGroupName="branch">
+          <label for="branch">Branch</label>
+          <select id="branch" formControlName="branchId">
+            <option *ngFor="let branch of branches" [value]="branch.branchId">
+              {{ branch.country }}
+            </option>
+          </select>
+        </div>
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="registerForm.invalid">Register</button>
+    </form>
+    <p>Already have an account? <a routerLink="/login">Login here</a>.</p>
+  </div>

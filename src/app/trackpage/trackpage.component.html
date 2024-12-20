@@ -1,0 +1,15 @@
+<app-menu></app-menu>
+<div class="container">
+    <h2>Tracks in : {{ branchCountry }}</h2>
+    <ul *ngIf="tracks.length; else noTracks">
+      <li *ngFor="let track of tracks">
+        <p><strong>Track Name:</strong> {{ track.trackName }}</p>
+        <p><strong>City:</strong> {{ track.city.cityName }} ({{ track.city.postcode }})</p>
+
+        <hr />
+      </li>
+    </ul>
+    <ng-template #noTracks>
+      <p>No tracks found for this branch.</p>
+    </ng-template>
+  </div>

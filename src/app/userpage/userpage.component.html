@@ -1,0 +1,31 @@
+<div class="user-container">
+    <h1>Welcome, {{ userDetails?.firstName }} {{ userDetails?.lastName }}!</h1>
+    <p><strong>Email:</strong> {{ userDetails?.email }}</p>
+  
+    <button (click)="onLogout()">Logout</button>
+  
+    <div class="role-buttons">
+      <!-- Role-specific buttons -->
+      <button *ngIf="isAdmin()" (click)="manageStaff()">Manage Staff</button>
+      <button *ngIf="isManager()" (click)="manageTrackMarshalls()">Manage Track Marshalls</button>
+      <button *ngIf="isTrackMarshall()" (click)="viewReports()">View Reports</button>
+      <button *ngIf="isCustomer()" (click)="fileReport()">File a Report</button>
+    </div>
+  
+    <div class="tickets-container" *ngIf="tickets.length; else noTickets">
+      <h2>Your Tickets</h2>
+      <ul>
+        <li *ngFor="let ticket of tickets">
+          <p><strong>Event:</strong> {{ ticket.event.eventName }}</p>
+          <p><strong>Date:</strong> {{ ticket.event.startDate }}</p>
+          <p><strong>Participation:</strong> {{ ticket.participationType }}</p>
+          <p><strong>Price:</strong> {{ ticket.price | currency }}</p>
+          <hr />
+        </li>
+      </ul>
+    </div>
+  
+    <ng-template #noTickets>
+      <p>You have no tickets yet.</p>
+    </ng-template>
+  </div>

@@ -1,0 +1,24 @@
+/* Center the dropdown in the middle of the screen */
+.dropdown-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    text-align: center;
+  }
+  
+  label {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+  
+  select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    width: 200px;
+    text-align: center;
+  }
